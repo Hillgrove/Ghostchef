@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<IProductDataService, ProductDataService>();
+builder.Services.AddSingleton<IMealDataService, MealDataService>();
 
 var app = builder.Build();
 

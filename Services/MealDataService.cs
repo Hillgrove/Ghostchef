@@ -2,11 +2,11 @@
 
 namespace Ghostchef.Services
 {
-    public class ProductDataService : IProductDataService
+    public class MealDataService : IMealDataService
     {
-        private List<Product> _products = new List<Product>
+        private List<Meal> _meals = new List<Meal>
         {
-            new Product(
+            new Meal(
                 1,
                 "Favoritkassen",
                 "Denne måltidkasse indeholder 4 af Ghostchefs mest solgte færdigretter",
@@ -14,7 +14,7 @@ namespace Ghostchef.Services
                 new List<Diet> { Diet.Veganer, Diet.Glutenfri },
                 new List<Allergy> { Allergy.Nødder }
                 ),
-            new Product(
+            new Meal(
                 2,
                 "Skaldyrskassen",
                 "Fantastisk beskrivelse her",
@@ -22,7 +22,7 @@ namespace Ghostchef.Services
                 new List<Diet> { Diet.Ingen },
                 new List<Allergy> { Allergy.Skaldyr }
                 ),
-            new Product(
+            new Meal(
                 3,
                 "Ugekassen",
                 "Uge kassen leveres altid om søndagen inden ugens start.",
@@ -33,9 +33,9 @@ namespace Ghostchef.Services
             )
         };
 
-        public List<Product> GetAll()
+        public List<Meal> GetAll()
         {
-            return _products;
+            return _meals;
         }
     }
 }

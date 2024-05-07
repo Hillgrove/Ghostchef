@@ -2,8 +2,8 @@
 
 namespace Ghostchef.Services
 {
-    public interface IProductDataService
+    public interface IMealDataService
     {
-        List<Product> GetAll();
+        List<Meal> GetAll();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Ghostchef.Models
 {
-	public class Product
+	public class Meal
 	{
 		public int Id { get; }
 		public string Name { get; }
@@ -10,7 +10,7 @@
 		public List<Diet> Diets { get; }
 		public List<Allergy> Allergies { get; }
 
-		public Product(int id, string name, string description, List<Ingredient> ingredients, List<Diet> diets, List<Allergy> allergies, bool inStock = true)
+		public Meal(int id, string name, string description, List<Ingredient> ingredients, List<Diet> diets, List<Allergy> allergies, bool inStock = true)
 		{
 			Id = id;
 			Name = name;

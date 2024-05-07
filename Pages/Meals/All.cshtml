@@ -1,46 +1,46 @@
 ﻿@page
-@model Ghostchef.Pages.Products.AllModel
+@model Ghostchef.Pages.Meals.AllModel
 
 @{
-    ViewData["Title"] = "Måltidskasser";
+    ViewData["Title"] = "Færdigretter";
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="container">
     <div class="row">
-        @foreach (var product in Model.Data)
+        @foreach (var meal in Model.Data)
         {
-            var cardClass = product.InStock ? "card" : "card bg-light text-secondary";
+            var cardClass = meal.InStock ? "card" : "card bg-light text-secondary";
             <div class="col-md-4 mb-3">
                 <div class="@cardClass">
                     <div class="card-header">
-                        @product.Name
+                        @meal.Name
                     </div>
                     <div class="card-body">
-                        <p class="card-text">@product.Description</p>
+                        <p class="card-text">@meal.Description</p>
                         <h5>Ingredients:</h5>
                         <ul>
-                            @foreach (var ingredient in product.Ingredients)
+                            @foreach (var ingredient in meal.Ingredients)
                             {
                                 <li>@ingredient.ToString()</li>
                             }
                         </ul>
                         <h5>Diets:</h5>
                         <ul>
-                            @foreach (var diet in product.Diets)
+                            @foreach (var diet in meal.Diets)
                             {
                                 <li>@diet.ToString()</li>
                             }
                         </ul>
                         <h5>Allergies:</h5>
                         <ul>
-                            @foreach (var allergy in product.Allergies)
+                            @foreach (var allergy in meal.Allergies)
                             {
                                 <li>@allergy.ToString()</li>
                             }
                         </ul>
-                        @if (!product.InStock)
+                        @if (!meal.InStock)
                         {
                             <p class="text-danger" style="font-size: 20px; font-weight: bold;">UDSOLGT</p>
                         }

@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Ghostchef.Models;
 using Ghostchef.Services;
 
-namespace Ghostchef.Pages.Products
+namespace Ghostchef.Pages.Meals
 {
     public class AllModel : PageModel
     {
-        private IProductDataService _productDataService;
+        private IMealDataService _productDataService;
         
-        public List<Product> Data { get; private set; }
+        public List<Meal> Data { get; private set; }
 
-        public AllModel(IProductDataService productDataService)
+        public AllModel(IMealDataService productDataService)
         {
             _productDataService = productDataService;
         }
