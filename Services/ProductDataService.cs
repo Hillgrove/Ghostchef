@@ -13,6 +13,7 @@ namespace Ghostchef.Services
             Create(new Product(
                 "Oksecuvette",
                 "200gram bøf af oksecuvette 150gram svampesauce, 100gram grøntsager og 150gram ristede kartofler",
+                135,
                 new List<Ingredient> { Ingredient.Mel, Ingredient.Sukker },
                 new List<Diet> { Diet.Veganer, Diet.Glutenfri },
                 new List<Allergy> { Allergy.Nødder }
@@ -21,6 +22,7 @@ namespace Ghostchef.Services
             Create(new Product(
                 "Laks",
                 "200gram laks 150 gram kartofler 100 gram grøntsager samt 100 gram dild sauce",
+                95,
                 new List<Ingredient> { Ingredient.Mel, Ingredient.Salt },
                 new List<Diet> { Diet.Ingen },
                 new List<Allergy> { Allergy.Skaldyr }
@@ -29,6 +31,7 @@ namespace Ghostchef.Services
             Create(new Product(
                 "Lasagne",
                 "Ovnklar Lasagne 1200 gram",
+                160,
                 new List<Ingredient> { Ingredient.Mel, Ingredient.Salt },
                 new List<Diet> { Diet.Ingen },
                 new List<Allergy> { Allergy.Ingen },

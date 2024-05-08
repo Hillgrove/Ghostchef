@@ -9,6 +9,8 @@ namespace Ghostchef.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Der skal angives en beskrivelse")]
         public string Description { get; set; }
+        [Required(ErrorMessage = "Der skal angives en pris")]
+        public int? Price { get; set; }
 		public bool InStock { get; set; }
         [Required]
         public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
@@ -17,13 +19,15 @@ namespace Ghostchef.Models
         [Required]
         public List<Allergy> Allergies { get; set; } = new List<Allergy>();
 
+
         public Product() { }
 
-        public Product(string name, string description, List<Ingredient> ingredients, List<Diet> diets, List<Allergy> allergies, bool inStock = true)
+        public Product(string name, string description, int price, List<Ingredient> ingredients, List<Diet> diets, List<Allergy> allergies, bool inStock = true)
 		{
 			Id = 0;
 			Name = name;
 			Description = description;
+			Price = price;
 			Ingredients = ingredients;
 			Diets = diets;
 			Allergies = allergies;
@@ -34,6 +38,7 @@ namespace Ghostchef.Models
 		{
 			Name = other.Name;
 			Description = other.Description;
+			Price = other.Price;
 			Ingredients = other.Ingredients;
 			Diets = other.Diets;
 			Allergies = other.Allergies;
