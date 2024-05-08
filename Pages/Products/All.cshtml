@@ -1,52 +1,62 @@
 ﻿@page
-@model Ghostchef.Pages.Meals.AllModel
+@model Ghostchef.Pages.Products.AllModel
 
 @{
     ViewData["Title"] = "Færdigretter";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="display-3 mb-5">@ViewData["Title"]</h1>
 
 <div class="container">
     <div class="row">
-        @foreach (var meal in Model.Data)
+        @foreach (var product in Model.Data)
         {
-            var cardClass = meal.InStock ? "card" : "card bg-light text-secondary";
+            var cardClass = product.InStock ? "card" : "card bg-light text-secondary";
             <div class="col-md-4 mb-3">
                 <div class="@cardClass">
                     <div class="card-header">
-                        @meal.Name
+                        @product.Name
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">@meal.Description</p>
+                    <div class="card-body d-flex flex-column">
+                        <p class="card-text">@product.Description</p>
                         <h5>Ingredients:</h5>
                         <ul>
-                            @foreach (var ingredient in meal.Ingredients)
+                            @foreach (var ingredient in product.Ingredients)
                             {
                                 <li>@ingredient.ToString()</li>
                             }
                         </ul>
                         <h5>Diets:</h5>
                         <ul>
-                            @foreach (var diet in meal.Diets)
+                            @foreach (var diet in product.Diets)
                             {
                                 <li>@diet.ToString()</li>
                             }
                         </ul>
                         <h5>Allergies:</h5>
                         <ul>
-                            @foreach (var allergy in meal.Allergies)
+                            @foreach (var allergy in product.Allergies)
                             {
                                 <li>@allergy.ToString()</li>
                             }
                         </ul>
-                        @if (!meal.InStock)
+                        @if (!product.InStock)
                         {
                             <p class="text-danger" style="font-size: 20px; font-weight: bold;">UDSOLGT</p>
                         }
+                        <div>
+                            <a class="btn btn-outline-danger btn-sm mt-3" type="button" title="Slet" asp-page="Delete" asp-route-id="@product.Id">Slet</a>
+                            <a class="btn btn-outline-info btn-sm mt-3" type="button" title="Rediger" asp-page="Edit" asp-route-id="@product.Id">Rediger</a>
+                        </div>
                     </div>
+
+
                 </div>
             </div>
         }
     </div>
 </div>
+
+<p>
+    <a class="btn btn-outline-primary mt-3" asp-page="Create">Tilføj ny færdigret</a>
+</p>

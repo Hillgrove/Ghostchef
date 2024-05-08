@@ -1,0 +1,69 @@
+﻿@page
+@model Ghostchef.Pages.Products.EditModel
+@{
+}
+
+<h1 class="display-3 mb-5">Rediger færdigret</h1>
+
+<form method="post">
+    <div class="form-group mb-3" hidden>
+        <label asp-for="@Model.Data.Id" class="control-label"></label>
+        <input asp-for="@Model.Data.Id" class="form-control" readonly="@(true)" />
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="@Model.Data.Name" class="control-label"></label>
+        <input asp-for="@Model.Data.Name" class="form-control" />
+        <span asp-validation-for="@Model.Data.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="@Model.Data.Description" class="control-label"></label>
+        <input asp-for="@Model.Data.Description" class="form-control" />
+        <span asp-validation-for="@Model.Data.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check mb-3">
+        <label>Ingredienser</label>
+        @foreach (var ingredient in Enum.GetValues(typeof(Ghostchef.Models.Ingredient)))
+        {
+            var typedIngredient = (Ghostchef.Models.Ingredient)ingredient;
+            <div>
+                <input type="checkbox" name="Ingredients" value="@typedIngredient.ToString()"
+                @(Model.Data.Ingredients.Contains(typedIngredient) ? "checked" : "") />
+                <label>@typedIngredient</label>
+            </div>
+        }
+    </div>
+    <div class="form-group form-check mb-3">
+        <label>Diæter</label>
+        @foreach (var diet in Enum.GetValues(typeof(Ghostchef.Models.Diet)))
+        {
+            var typedDiet = (Ghostchef.Models.Diet)diet;
+            <div>
+                <input type="checkbox" name="diets" value="@typedDiet.ToString()"
+                @(Model.Data.Diets.Contains(typedDiet) ? "checked" : "") />
+                <label>@typedDiet</label>
+            </div>
+        }
+    </div>    
+    <div class="form-group form-check mb-3">
+        <label>Allergier</label>
+        @foreach (var allergy in Enum.GetValues(typeof(Ghostchef.Models.Allergy)))
+        {
+            var typedAllergy = (Ghostchef.Models.Allergy)allergy;
+            <div>
+                <input type="checkbox" name="Allergies" value="@typedAllergy.ToString()"
+                @(Model.Data.Allergies.Contains(typedAllergy) ? "checked" : "") />
+                <label>@typedAllergy</label>
+            </div>
+        }
+    </div>
+    <div class="form-group form-check mb-3">
+        <label asp-for="@Model.Data.InStock" class="control-label"></label>
+        <input asp-for="@Model.Data.InStock" class="form-check" />
+    </div>
+    <p>
+        <div class="form-group mb-3">
+            <input type="submit" value="Gem" class="btn btn-outline-primary" />
+        </div>
+    </p>
+</form>
