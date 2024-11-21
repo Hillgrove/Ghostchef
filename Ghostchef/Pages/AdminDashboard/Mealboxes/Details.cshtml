@@ -1,0 +1,121 @@
+﻿@page
+@model GC_Subscription.Pages.Mealboxes.DetailsModel
+
+@{
+    ViewData["Title"] = "Detaljer";
+}
+
+
+<!-- Content Container -->
+<div class="container py-5">
+    <div class="row">
+
+        <!-- Include Admin Menu -->
+        @await Html.PartialAsync("../Shared/_AdminMenu")
+
+        <!-- Center the column -->
+        <div class="col-lg-9 mb-4">
+            <div class="row">
+
+                <!-- Left column w. image -->
+                <div class="col-md-4 mb-4">
+                    <img src="@Model.Mealbox.ImageUrl" class="img-fluid details-image" alt="Mealbox Image">
+                </div>
+
+                <!-- Right column w. text -->
+                <div class="col-md-8">
+                    <div class="card meal-box-card">
+
+                        <!-- Card Header -->
+                        <div class="card-header">
+                            <h5>@Model.Mealbox.Name</h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body">
+
+                            <!-- Description -->
+                            <div class="description-container">
+                                <!-- Splits up the description text into individual lines -->
+                                @foreach (var descriptionPart in Model.Mealbox.Description.Split("\n", StringSplitOptions.RemoveEmptyEntries))
+                                {
+                                    <!-- Lines with :-signs is bolded -->
+                                    if (descriptionPart.Contains(":"))
+                                    {
+                                        <p class="card-text text-muted bold-text mb-0"><strong>@descriptionPart.Trim()</strong></p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text text-muted mb-0">@descriptionPart.Trim()</p>
+                                    }
+                                }
+                            </div>
+
+
+                            <!-- Products -->
+                            <div class="description-container">
+                                <ul>
+                                    @foreach (var product in Model.Mealbox.Products)
+                                    {
+                                        <li class="card-text text-muted">@product.Name</li>
+                                    }
+                                </ul>
+                            </div>
+
+
+                            <!-- Theme -->
+                            @if (Model.Mealbox.Theme != null)
+                            {
+                                <div class="theme-container">
+                                    <p class="card-text text-muted mb-0"><strong>Tema:</strong></p>
+                                    <p class="card-text text-muted">@Model.Mealbox.Theme</p>
+                                </div>
+                            }
+
+                            <!-- Dates -->
+                            @if (Model.Mealbox.DateFrom != null && Model.Mealbox.DateTo != null)
+                            {
+                                <div class="date-container">
+                                    <p class="card-text text-muted mb-0">Fra:</p>
+                                    <p class="card-text text-muted">@Model.Mealbox.DateFrom?.ToString("dd-MM-yyyy")</p>
+
+                                    <p class="card-text text-muted mb-0">Til:</p>
+                                    <p class="card-text text-muted">@Model.Mealbox.DateTo?.ToString("dd-MM-yyyy")</p>
+                                </div>
+                            }
+
+                            <!-- Diets and Allergies -->
+                            <div>
+                                <div class="btn-container">
+                                    @foreach (var diet in Model.UniqueDiets)
+                                    {
+                                        <button type="button" class="btn btn-success btn-sm mb-2">@diet</button>
+                                    }
+                                </div>
+
+                                <div class="btn-container">
+                                    @foreach (var allergy in Model.UniqueAllergies)
+                                    {
+                                        <button type="button" class="btn btn-danger btn-sm mb-2">@allergy</button>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Price -->
+                            <div>
+                                <p class="card-text card-text-price">kr. @Model.Mealbox.Price,-</p>
+                            </div>
+
+                            <!-- Function Icons -->
+                            <div align="right">
+                                <a asp-page="./Index"><i class="fas fa-arrow-left"></i></a> <!-- Return icon -->
+                                <a asp-page="./Edit" asp-route-id="@Model.Mealbox.Id"><i class="fas fa-edit"></i></a> <!-- Edit icon -->
+                                <a asp-page="./Delete" asp-route-id="@Model.Mealbox.Id"><i class="far fa-trash-alt" style="color: red;"></i></a> <!-- Delete icon -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

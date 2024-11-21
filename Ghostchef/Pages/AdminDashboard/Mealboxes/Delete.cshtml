@@ -1,0 +1,40 @@
+﻿@page
+@model GC_Subscription.Pages.Mealboxes.DeleteModel
+
+@{
+    ViewData["Title"] = "Slet";
+}
+
+<h1>Slet</h1>
+
+<h3>Er du sikker på at du vil slette?</h3>
+<div>
+    <h4>Måltidskasse</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Navn
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Mealbox.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Beskrivelse
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Mealbox.Description)
+        </dd>
+        <dt class="col-sm-2">
+            Pris
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Mealbox.Price)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Mealbox.Id" />
+        <input type="submit" value="Slet" class="btn btn-danger" /> |
+        <a asp-page="./Index">Tilbage til oversigten</a>
+    </form>
+</div>

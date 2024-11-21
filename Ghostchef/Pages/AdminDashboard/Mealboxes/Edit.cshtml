@@ -1,0 +1,173 @@
+﻿@page
+@model GC_Subscription.Pages.Mealboxes.EditModel
+
+@{
+    ViewData["Title"] = "Rediger";
+    ViewData["ActivePage"] = "EditMealbox";
+}
+
+
+
+<!-- Content Container -->
+<div class="container py-5">
+
+    <div class="row">
+
+
+        <!-- Include Admin Menu -->
+        @await Html.PartialAsync("../Shared/_AdminMenu")
+
+
+        <!-- Start mealbox Creation -->
+        <div class="col-1"></div>
+
+
+        <div class="col-9">
+
+            <!-- Heading -->
+            <div class="row">
+                <h1 class="display-6">Rediger måltidskasse</h1>
+                <hr>
+            </div>
+
+            <!-- Start Form -->
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <!-- Hidden Id -->
+                <input type="hidden" asp-for="Mealbox.Id" />
+
+                
+                <!-- Name field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Navn</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Mealbox.Name" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Mealbox.Name" class="text-danger"></span>
+                </div>
+
+                
+                <!-- Theme field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Tema</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Mealbox.Theme" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Mealbox.Theme" class="text-danger"></span>
+                </div>
+
+
+                <!-- DateFrom and DateTo fields -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Dato</label>
+                    </div>
+                    <div class="col-3">
+                        <label class="col-form-label">Start</label>
+                        <input asp-for="Mealbox.DateFrom" type="date" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Mealbox.DateFrom" class="text-danger"></span>
+                    </div>
+                    <div class="col-3">
+                        <label class="col-form-label">Slut</label>
+                        <input asp-for="Mealbox.DateTo" type="date" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Mealbox.DateTo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                
+                <!-- Description field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Beskrivelse</label>
+                    </div>
+                    <div class="col-6">
+                        <textarea asp-for="Mealbox.Description" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                    <span asp-validation-for="Mealbox.Description" class="text-danger"></span>
+                </div>
+
+
+                <!-- Product field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Færdigretter</label>
+                    </div>
+                    <div class="col-6">
+                        @foreach (var product in Model.AvailableProducts)
+                        {
+                            var isChecked = Model.Mealbox.Products.Any(p => p.Id == product.Id);
+                            <input type="checkbox" class="btn-check visually-hidden" id="product-@product.Id" name="SelectedProductIds" value="@product.Id" autocomplete="off" @(isChecked ? "checked" : "")>
+                            <label class="btn btn-outline-success" for="product-@product.Id">@product.Name</label>
+                        }
+                    </div>
+                </div>
+
+
+                <!-- Price field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Pris</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <span class="input-group-text">DKK</span>
+                            <input asp-for="Mealbox.Price" class="form-control" step=1 />
+                            <span class="input-group-text">.00</span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Mealbox.Price" class="text-danger"></span>
+                </div>
+
+
+                <!-- Image field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Billede</label>
+                    </div>
+                    <div class="col-6">
+
+                        <!-- Show current image -->
+                        @if (!string.IsNullOrEmpty(Model.Mealbox.ImageUrl))
+                        {
+                            <img src="@Model.Mealbox.ImageUrl" alt="Nuværende billed" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+                        }
+                        else
+                        {
+                            <p>Intet billede tilgængeligt</p>
+                        }
+
+                        <!-- Upload nyt billede -->
+                        <input type="file" asp-for="Image" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+
+                <!-- Submit button -->
+                <div class="row">
+                    <div class="form-group col-8">
+                        <input type="submit" value="Opdater" class="btn btn-lg btn-success w-100" />
+                    </div>
+                </div>
+            </form>
+            <!-- End Form -->
+
+        </div>
+        <!-- End Product Creation -->
+
+    </div>
+</div>
+
+
+<!-- End Content Container -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

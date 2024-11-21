@@ -1,0 +1,84 @@
+﻿@page
+@model GC_Subscription.Pages.Mealboxes.IndexModel
+
+@{
+    ViewData["Title"] = "Rediger";
+    ViewData["ActivePage"] = "IndexMealbox";
+}
+
+
+<div class="container py-5">
+
+
+    <div class="row">
+
+        <!-- Include Admin Menu -->
+        <div class="col col-3">
+            @await Html.PartialAsync("../Shared/_AdminMenu")
+        </div>
+
+        <div class="col">
+            <div class="row">
+                @foreach (var item in Model.Mealbox)
+                {
+                    <div class="col-sm-2 col-md-4 col-lg-4 mb-3">
+
+                        <!-- Card Start -->
+                        <div class="card meal-box-card meal-box-card-hover">
+                    
+                            <!-- Image -->
+                            <img src="@item.ImageUrl" alt="Billede af måltidskassen" class="card-img-top" />
+                    
+                            <!-- Card Header -->
+                            <div class="card-header">
+                                <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body">
+                        
+                                <!-- Diets and Allergies -->
+                                <div class="btn-container">
+
+                                    <!-- Diets -->
+                                    @foreach (var diet in item.Products.SelectMany(p => p.Diets)
+                                   .Select(a => a.Name)
+                                   .Distinct()
+                                   .OrderBy(a => a, StringComparer.Create(new System.Globalization.CultureInfo("da-DK"), false)))
+                                    {
+                                        <button type="button" class="btn btn-success btn-sm mb-2">@diet <br /></button>
+                                    }
+
+                                    <!-- Allergies -->
+                                    @foreach (var allergy in item.Products.SelectMany(p => p.Allergies)
+                                   .Select(a => a.Name)
+                                   .Distinct()
+                                   .OrderBy(a => a, StringComparer.Create(new System.Globalization.CultureInfo("da-DK"), false)))
+                                    {
+
+                                        <button type="button" class="btn btn-danger btn-sm mb-2">@allergy <br /></button>
+                                    }
+                                </div>
+
+                                <!-- Card Price -->
+                                <p class="card-text card-text-price">kr. @Html.DisplayFor(modelItem => item.Price),-</p>
+                            </div>
+                        
+                            <!-- Card Footer -->
+                            <div class="card-footer">
+                                <a asp-page="./Details" asp-route-id="@item.Id" class="btn-link"><i class="fas fa-info-circle"></i></a> <!-- Details/Open icon -->
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-link"><i class="fas fa-edit"></i></a> <!-- Edit icon -->
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn-link"><i class="far fa-trash-alt" style="color: red;"></i></a> <!-- Delete icon -->
+                            </div>
+
+                        </div>
+                        <!-- Card End -->
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

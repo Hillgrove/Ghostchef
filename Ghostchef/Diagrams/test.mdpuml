@@ -1,0 +1,86 @@
+﻿@startuml
+!theme materia
+
+	actor Admin
+
+	Admin -> Products.Index : Se alle færdigretter
+
+	Products.Index --> Admin : Vis færdigretter
+@enduml
+
+@startuml
+actor Customer
+participant Browser
+participant Server
+participant Database
+
+Customer -> Browser: Open mealbox page
+Browser -> Server: HTTP GET /Mealboxes
+Server -> Database: Query all mealboxes
+Database -> Server: Return mealboxes data
+Server -> Browser: Render mealboxes list
+Browser -> Customer: Display mealboxes
+
+Customer -> Browser: Select a mealbox
+Browser -> Server: HTTP GET /Mealboxes/{id}
+Server -> Database: Query mealbox details
+Database -> Server: Return mealbox details
+Server -> Browser: Render mealbox details
+Browser -> Customer: Display mealbox details
+
+alt Customer decides to change products
+    Customer -> Browser: Change products in mealbox
+    Browser -> Server: HTTP POST /Mealboxes/Update
+    Server -> Database: Update mealbox with new products
+    Database -> Server: Confirm update
+    Server -> Browser: Render updated mealbox details
+    Browser -> Customer: Display updated mealbox
+end
+
+Customer -> Browser: Order mealbox
+Browser -> Server: HTTP POST /Orders/Create
+Server -> Database: Create new order
+Database -> Server: Confirm order creation
+Server -> Browser: Render order confirmation
+Browser -> Customer: Display order confirmation
+
+@enduml
+
+
+@startuml
+actor Customer
+participant Browser
+participant Server
+participant Database
+
+Customer -> Browser: Open mealbox page
+Browser -> Server: HTTP GET /Mealboxes
+Server -> Database: Query all mealboxes
+Database -> Server: Return mealboxes data
+Server -> Browser: Render Index.cshtml
+Browser -> Customer: Display mealboxes (Index.cshtml)
+
+Customer -> Browser: Select a mealbox
+Browser -> Server: HTTP GET /Mealboxes/{id}
+Server -> Database: Query mealbox details
+Database -> Server: Return mealbox details
+Server -> Browser: Render Details.cshtml
+Browser -> Customer: Display mealbox details (Details.cshtml)
+
+alt Customer decides to change products
+    Customer -> Browser: Change products in mealbox
+    Browser -> Server: HTTP POST /Mealboxes/Update
+    Server -> Database: Update mealbox with new products
+    Database -> Server: Confirm update
+    Server -> Browser: Render Details.cshtml
+    Browser -> Customer: Display updated mealbox (Details.cshtml)
+end
+
+Customer -> Browser: Order mealbox
+Browser -> Server: HTTP POST /Orders/Create
+Server -> Database: Create new order
+Database -> Server: Confirm order creation
+Server -> Browser: Render Buy.cshtml
+Browser -> Customer: Display order confirmation (Buy.cshtml)
+
+@enduml

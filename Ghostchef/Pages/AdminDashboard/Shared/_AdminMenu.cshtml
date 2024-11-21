@@ -1,0 +1,24 @@
+﻿@{
+    string activePage = ViewData["ActivePage"] as string ?? "";
+}
+
+<div class="col-2">
+    <div class="admin-panel-inner-container">
+        <small><strong>Admin Panel</strong></small>
+        <ul class="nav flex-column admin-panel">
+            <li class="nav-item">
+                <a class="nav-link @(activePage == "IndexMealbox" ? "active" : "")" href="/AdminDashboard/Mealboxes">Måltidskasser</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(activePage == "IndexProduct" ? "active" : "")" href="/AdminDashboard/Products">Færdigretter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(activePage == "CreateMealbox" ? "active" : "")" href="/AdminDashboard/Mealboxes/Create">Opret måltidskasse</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(activePage == "CreateProduct" ? "active" : "")" href="/AdminDashboard/Products/Create">Opret færdigret</a>
+            </li>
+
+        </ul>
+    </div>
+</div>

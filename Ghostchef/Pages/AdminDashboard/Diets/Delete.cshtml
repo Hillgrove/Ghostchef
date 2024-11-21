@@ -1,0 +1,28 @@
+﻿@page
+@model GC_Subscription.Pages.Diets.DeleteModel
+
+@{
+    ViewData["Title"] = "Slet Kostpræference";
+}
+
+<h1>Slet</h1>
+
+<h3>Er du sikker på at du vil slette denne?</h3>
+<div>
+    <h4>Kostpræference</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Navn
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Diet.Name)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Diet.Id" />
+        <input type="submit" value="Slet" class="btn btn-danger" /> |
+        <a asp-page="./Index">Tilbage til oversigten</a>
+    </form>
+</div>

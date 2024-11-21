@@ -1,0 +1,127 @@
+﻿
+
+/* -- Always show scroll bar --*/
+html {
+    overflow-y: scroll;
+}
+
+
+/* -- Admin Panel Start -- */
+
+.admin-panel-inner-container {
+    border-radius: 15px;
+    border: 2px solid black !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    padding: 16px 0px 16px 10px;
+    text-align: !important;
+    position: fixed;
+}
+
+.admin-panel {
+    text-align: left !important;
+}
+
+.admin-panel a.nav-link {
+    color: #000 !important;
+    min-width: 180px !important;
+}
+
+.admin-panel a.nav-link.active {
+    font-weight: bold;
+}
+
+.admin-panel a.nav-link:hover {
+    text-decoration: underline;
+}
+
+/* -- Admin Panel End -- */
+
+
+.display-6 {
+    font-size: 1.65rem !important;
+}
+
+.btn-link {
+    margin-left: 5px;
+}
+
+.description-container {
+    margin-bottom: 20px;
+}
+
+.btn-container {
+    display: inline-block;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-header, .card-body, .btn-container {
+    flex: 0 0 auto;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding-top: 15px;
+}
+
+.card-footer {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card-text-price {
+    font-size: 2rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.meal-box-card {
+    border: 2px solid;
+    border-radius: 15px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.details-image {
+    border: 2px solid;
+    border-radius: 15px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.meal-box-card-hover:hover {
+    transform: translateY(-5px);
+    transition: transform 0.2s ease;
+}
+
+.theme-container {
+    margin-bottom: 10px; 
+}
+
+.date-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px; 
+}
+
+.date-container p {
+    margin-right: 20px; 
+}

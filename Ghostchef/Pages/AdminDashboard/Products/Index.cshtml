@@ -1,0 +1,55 @@
+﻿@page
+@model GC_Subscription.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Rediger";
+    ViewData["ActivePage"] = "IndexProduct";
+}
+
+
+<div class="container py-5">
+    <div class="row">
+     
+        <!-- Include Admin Menu -->
+        <div class="col col-3">
+            @await Html.PartialAsync("../Shared/_AdminMenu")
+        </div>
+
+        <div class="col">
+            <div class="row">
+            @foreach (var item in Model.Product)
+            {
+                <div class="col-sm-2 col-md-4 col-lg-4 mb-3">
+                    <div class="card meal-box-card meal-box-card-hover">
+                        <img src="@item.ImageUrl" alt="Billede af retten" class="card-img-top" />
+                        <div class="card-header">
+                            <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="btn-container">
+                                @foreach (var diet in item.Diets)
+                                {
+                                    <button type="button" class="btn btn-success btn-sm mb-2"> @diet.Name <br /></button>
+                                }
+
+                                @foreach (var allergy in item.Allergies)
+                                {
+                                    <button type="button" class="btn btn-danger btn-sm mb-2"> @allergy.Name <br /></button>
+                                }
+                            </div>
+                            <p class="card-text card-text-price"> kr. @Html.DisplayFor(modelItem => item.Price),-</p>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn-link"><i class="fas fa-info-circle"></i></a> <!-- Details/Open icon -->
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-link"><i class="fas fa-edit"></i></a> <!-- Edit icon -->
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn-link"><i class="far fa-trash-alt" style="color: red;"></i></a> <!-- Delete icon -->
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+            

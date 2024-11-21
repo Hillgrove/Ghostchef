@@ -1,0 +1,139 @@
+﻿@page
+@model GC_Subscription.Pages.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Opret færdigret";
+    ViewData["ActivePage"] = "CreateProduct";
+}
+
+<!-- Content Container -->
+<div class="container py-5">
+
+    <div class="row">
+              
+        
+        <!-- Include Admin Menu -->
+        @await Html.PartialAsync("../Shared/_AdminMenu")
+
+
+
+        <!-- Start mealbox Creation -->
+        <div class="col-1"></div>
+
+
+        <div class="col-9">
+
+            <!-- Heading -->
+            <div class="row">
+                <h1 class="display-6">Opret færdigret</h1>
+                <hr>
+            </div>
+
+            <!-- Start Form -->
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Name field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Navn</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Product.Name" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+
+
+                <!-- Description field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Beskrivelse</label>
+                    </div>
+                    <div class="col-6">
+                        <textarea asp-for="Product.Description" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+
+
+                <!-- Price field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Pris</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <span class="input-group-text">DKK</span>
+                            <input asp-for="Product.Price" class="form-control" step=1 />
+                            <span class="input-group-text">.00</span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+
+
+                <!-- Diet field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Kostpræferencer</label>
+                    </div>
+                    <div class="col-6">
+                        @foreach (var diet in Model.AvailableDiets)
+                        {
+                            <input type="checkbox" class="btn-check visually-hidden" id="diet-@diet.Id" name="SelectedDietIds" value="@diet.Id" autocomplete="off">
+                            <label class="btn btn-outline-success" for="diet-@diet.Id">@diet.Name</label>
+                        }
+                    </div>
+                </div>
+
+
+                <!-- Allergy field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Allergier</label>
+                    </div>
+                    <div class="col-6">
+                        @foreach (var allergy in Model.AvailableAllergies)
+                        {
+                            <input type="checkbox" class="btn-check visually-hidden" id="allergy-@allergy.Id" name="SelectedAllergyIds" value="@allergy.Id" autocomplete="off">
+                            <label class="btn btn-outline-success" for="allergy-@allergy.Id">@allergy.Name</label>
+                        }
+                    </div>
+                </div>
+
+
+                <!-- Image field -->
+                <div class="form-group row align-items-center mb-2">
+                    <div class="col-2">
+                        <label class="col-form-label">Billede</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="file" asp-for="Image" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+
+                <!-- Submit button -->
+                <div class="row">
+                    <div class="form-group col-8">
+                        <input type="submit" value="Opret færdigret" class="btn btn-lg btn-success w-100" />
+                    </div>
+                </div>
+            </form>
+            <!-- End Form -->
+
+        </div>
+        <!-- End Product Creation -->
+
+    </div>
+</div>
+
+
+<!-- End Content Container -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,321 @@
+﻿@page
+@model GC_Subscription.Pages.Buy.IndexModel
+
+@{
+    ViewData["Title"] = "Køb måltidskasse";
+}
+
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="spacer-10"></div>
+            <img src="https://ghostchef.dk/wp-content/uploads/2023/11/DSC_0016-scaled.jpg" alt="" class="img-fluid product-image">
+        </div>
+        <div class="col">
+
+            <div class="clearfix"><br></div>
+            <div class="row">
+                <h2>
+                    Køb måltidskasse
+                </h2>
+            </div>
+
+            <hr>
+
+            <div class="clearfix"></div>
+            <!-- People -->
+
+            <h1 class="display-6">Vælg antal personer</h1>
+            <small>Hvor mange spiser med?</small>
+
+            <div class="clearfix"><div class="spacer-10"></div></div>
+
+            <div class="row align-items-center gap-0">
+                <div class="col">
+                    <input type="radio" class="btn-check" name="people_options" id="people_option1" autocomplete="off" checked>
+                    <label class="btn btn-outline-success d-block w-100" for="people_option1">1 person</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="btn-check" name="people_options" id="people_option2" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="people_option2">2 personer</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="btn-check" name="people_options" id="people_option3" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="people_option3">3 personer</label>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="spacer-10"></div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col">
+                    <input type="radio" class="btn-check" name="people_options" id="people_option4" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="people_option4">4 personer</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="btn-check" name="people_options" id="people_option5" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="people_option5">5 personer</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="btn-check" name="people_options" id="people_option6" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="people_option6">6 personer</label>
+                </div>
+            </div>
+            <!-- End People -->
+
+            <div class="clearfix"><br></div>
+
+            <!-- Interval -->
+            <h1 class="display-6">Leveringsfrekvens</h1>
+            <small>Hvor ofte ønsker du at modtage en måltidskasse?</small>
+            <div class="clearfix"><div class="spacer-10"></div></div>
+
+
+            <div class="row align-items-center gap-0">
+                <div class="col">
+                    <input type="radio" class="btn-check" name="interval_option" id="interval_option1" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="interval_option1">Uge til uge</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="btn-check" name="interval_option" id="interval_option2" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="interval_option2">Hver anden uge</label>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="spacer-10"></div>
+            </div>
+
+            <div class="row align-items-center gap-0">
+                <div class="col">
+                    <input type="radio" class="btn-check" name="interval_option" id="interval_option3" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="interval_option3">Hver tredje uge</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="btn-check" name="interval_option" id="interval_option4" autocomplete="off">
+                    <label class="btn btn-outline-success d-block w-100" for="interval_option4">Månedligt</label>
+                </div>
+            </div>
+            <!-- End Interval -->
+
+            <div class="clearfix"><br></div>
+
+
+            <!-- Diet field -->
+            <div class="form-group row align-items-center mb-2">
+                <div class="col-12">
+                    <h1 class="display-6">Kostpræferencer</h1>
+                </div>
+                <div class="col-12">
+                    @foreach (var diet in Model.AvailableDiets)
+                    {
+                        
+                        <input type="checkbox" class="btn-check visually-hidden" id="diet-@diet.Id" name="SelectedDietIds" value="@diet.Id" autocomplete="off">
+                        <label class="btn btn-outline-success" for="diet-@diet.Id">@diet.Name</label>
+                    }
+                </div>
+            </div>
+
+            <div class="clearfix"><br></div>
+
+            <!-- Allergy field -->
+            <div class="form-group row align-items-center mb-2">
+                <div class="col-12">
+                    <h1 class="display-6">Allergier</h1>
+                </div>
+                <div class="col-12">
+                    @foreach (var allergy in Model.AvailableAllergies)
+                    {
+                        
+                        <input type="checkbox" class="btn-check visually-hidden" id="allergy-@allergy.Id" name="SelectedAllergyIds" value="@allergy.Id" autocomplete="off">
+                        <label class="btn btn-outline-success" for="allergy-@allergy.Id">@allergy.Name</label>
+                    }
+                </div>
+            </div>
+
+
+            <div id="dishSelections" class="">
+
+                <!-- Products -->
+                <div class="clearfix"><br></div>
+                <h1 class="display-6">Antal retter</h1>
+                <small>Hvilke retter ønsker du & hvor mange dage vil du have leveret til?</small>
+                <div class="clearfix"><div class="spacer-10"></div></div>
+
+               <!-- Dynamic showing of select from DB -->
+                @for (int day = 1; day <= 4; day++)
+                {
+                    <div class="input-group">
+                        <span class="input-group-text">Dag @day</span>
+                        <select class="form-select" aria-label="Vælg eller fravælg retter" id="product_day_@day" onchange="updateTooltip(@day)">
+                            <option value="" data-name="Ingen ret valgt" data-description="Vælg en ret for at se beskrivelsen her.">Fravælg</option>
+                            <optgroup label="Retter">
+                                @foreach (var product in Model.AvailableProducts)
+                                {
+                                    <option value="@product.Id" data-name="@product.Name" data-description="@product.Description">@product.Name</option>
+                                }
+                            </optgroup>
+                        </select>
+
+                        <!-- Tooltip -->
+                        <span class="tooltip-trigger">❕</span>
+                        <div class="tooltip-box" id="tooltip_day_@day">
+                            <p class="my-tooltip">Vælg en ret for at se beskrivelsen her.</p>
+                        </div>
+                    </div>
+                }
+               
+ 
+            </div>
+
+
+            <div class="spacer-10"></div>
+
+            <!-- Button to trigger the modal -->
+            <div class="btn btn-success btn-lg d-block w-100" style="float: right !important;" onclick="showOverview()">Gå til betaling</div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="overviewModal" tabindex="-1" aria-labelledby="overviewModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="overviewModalLabel">Valgt Oversigt</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="overviewContent">
+                            <!-- Content will be inserted here by JavaScript -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                            <button type="button" class="btn btn-primary">Bekræft og betal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<script>
+
+    $('input[name="preferences[]"]').on('change', function () {
+
+        $('label.defaultAllergySelection').removeClass('active');
+
+        var len = $('input[name="preferences[]"]:checked').length;
+
+        if(len <= 0)  {
+            $('label.defaultAllergySelection').addClass('active');
+        }
+    });
+
+    $('input.defaultAllergySelection').on('change', function () {
+
+        if($('input.defaultAllergySelection').is(':checked')) {
+            $('input[name="preferences[]"]').prop('checked', false);
+        }
+
+        $('label.defaultAllergySelection').addClass('active');  
+    });
+
+</script>
+
+
+<!-- JavaScript function to update whats in the select container -->
+<script>
+    function updateTooltip(day) {
+                        
+        var selectElement = document.getElementById('product_day_' + day);
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+                        
+        var tooltipElement = document.getElementById('tooltip_day_' + day);
+
+                        
+        var name = selectedOption.getAttribute('data-name');
+        var description = selectedOption.getAttribute('data-description');
+                   
+        tooltipElement.innerHTML = `
+                <p class="my-tooltip">
+                    <strong>${name}</strong>
+                </p>
+
+                <p>
+                    <strong>Energi:</strong> 187 kcal
+                        <br/>
+                    <strong>Protein:</strong> 1.9 gram
+                    <br/>
+                    <strong>Fedt:</strong> 15.7 gram
+                    <br/>
+                    <strong>Kulhydrater:</strong> 11.7 gram
+                </p>
+                 `;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            for (var day = 1; day <= 4; day++) {
+                updateTooltip(day);
+            }
+        });
+    }
+
+    function showOverview() {
+        let overviewContent = '';
+
+        // Get selected people option
+        const peopleOptions = document.querySelectorAll('input[name="people_options"]');
+        let selectedPeople;
+        peopleOptions.forEach(option => {
+            if (option.checked) {
+                selectedPeople = option.nextElementSibling.innerText;
+            }
+        });
+        overviewContent += `<p><strong>Antal personer:</strong> ${selectedPeople}</p>`;
+
+        // Get selected interval option
+        const intervalOptions = document.querySelectorAll('input[name="interval_option"]');
+        let selectedInterval;
+        intervalOptions.forEach(option => {
+            if (option.checked) {
+                selectedInterval = option.nextElementSibling.innerText;
+            }
+        });
+        overviewContent += `<p><strong>Leveringsfrekvens:</strong> ${selectedInterval}</p>`;
+
+        // Get selected diets
+        const selectedDiets = [];
+        document.querySelectorAll('input[name="SelectedDietIds"]:checked').forEach(diet => {
+            selectedDiets.push(diet.nextElementSibling.innerText);
+        });
+        overviewContent += `<p><strong>Kostvaner:</strong> ${selectedDiets.join(', ')}</p>`;
+
+        // Get selected allergies
+        const selectedAllergies = [];
+        document.querySelectorAll('input[name="SelectedAllergyIds"]:checked').forEach(allergy => {
+            selectedAllergies.push(allergy.nextElementSibling.innerText);
+        });
+        overviewContent += `<p><strong>Allergier:</strong> ${selectedAllergies.join(', ')}</p>`;
+
+        // Get selected dishes
+        for (let day = 1; day <= 4; day++) {
+            const selectElement = document.getElementById('product_day_' + day);
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const dishName = selectedOption.getAttribute('data-name');
+            overviewContent += `<p><strong>Dag ${day}:</strong> ${dishName}</p>`;
+        }
+
+        // Update the modal content
+        document.getElementById('overviewContent').innerHTML = overviewContent;
+
+        // Show the modal
+        new bootstrap.Modal(document.getElementById('overviewModal')).show();
+    }
+
+</script>
