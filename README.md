@@ -1,5 +1,7 @@
 # 👻 Ghostchef – Måltidskasse Abonnementssystem  
-**Datamatiker Eksamen – Forår 2024**
+
+### 📘 2. Semester Eksamen – Forår 2024
+**Fag:** Software Constrution og Software Design
 
 Ghostchef er en webapplikation udviklet i C# med Razor Pages og Entity Framework. Formålet er at tilbyde brugere mulighed for at oprette og tilpasse abonnementer på måltidskasser, administrere kostpræferencer og håndtere betalinger og fakturaer – alt sammen som en udvidelse til Ghostchefs eksisterende website.
 
